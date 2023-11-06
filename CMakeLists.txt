@@ -8,6 +8,15 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED) #UPDATED
+
+add_executable(talker src/publisher_member_function.cpp) #UPDATED
+
+ament_target_dependencies(talker rclcpp std_msgs) #UPDATED
+
+install(TARGETS       #UPDATED
+  talker
+  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
