@@ -1,0 +1,8 @@
+cpplint --filter=-build/c++11,+build/c++17,-build/namespaces,-build/include_order $(find . -name "*.cpp" -o -name "*.hpp")
+
+Done processing ./include/beginner_tutorials/publisher_member_function.hpp
+Done processing ./include/beginner_tutorials/subscriber_member_function.hpp
+Done processing ./src/pub_main.cpp
+Done processing ./src/publisher_member_function.cpp
+Done processing ./src/sub_main.cpp
+Done processing ./src/subscriber_member_function.cpp
