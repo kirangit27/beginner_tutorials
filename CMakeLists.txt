@@ -8,20 +8,43 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED) #UPDATED
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)  #UPDATED
 
-include_directories(include/beginner_tutorials) #UPDATED
+set(srv_files           #UPDATED
+  "srv/NewMsg.srv"
+)
 
-add_executable(talker src/publisher_member_function.cpp src/pub_main.cpp) #UPDATED
-add_executable(listener src/subscriber_member_function.cpp src/sub_main.cpp) #UPDATED
+include_directories(include/beginner_tutorials) 
 
-ament_target_dependencies(talker rclcpp std_msgs) #UPDATED
-ament_target_dependencies(listener rclcpp std_msgs) #UPDATED
+rosidl_generate_interfaces(${PROJECT_NAME}  #UPDATED
+  ${srv_files}
+)
+rosidl_get_typesupport_target(cpp_typesupport_target  #UPDATED
+  ${PROJECT_NAME} rosidl_typesupport_cpp)
+
+ament_export_dependencies(rosidl_default_runtime)   #UPDATED
+
+add_executable(talker src/publisher_member_function.cpp src/pub_main.cpp) 
+add_executable(listener src/subscriber_member_function.cpp src/sub_main.cpp) 
+
+ament_target_dependencies(talker rclcpp std_msgs) 
+ament_target_dependencies(listener rclcpp std_msgs) 
+
+target_link_libraries(talker "${cpp_typesupport_target}")   #UPDATED
+target_link_libraries(listener "${cpp_typesupport_target}")   #UPDATED
 
 install(TARGETS       #UPDATED
   talker
   listener
   DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY       #UPDATED
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+ament_export_dependencies(rosidl_default_runtime)   #UPDATED
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
