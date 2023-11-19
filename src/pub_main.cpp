@@ -13,7 +13,13 @@
 
 int main(int argc, char * argv[]) {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MinimalPublisher>());
+  // Default frequency value
+  double frequency = 2.0;
+   // Check if a custom frequency is provided as a command-line argument
+  if (argc > 1) {
+    frequency = std::atof(argv[1]);
+  }
+  rclcpp::spin(std::make_shared<MinimalPublisher>(frequency));
   rclcpp::shutdown();
   return 0;
 }

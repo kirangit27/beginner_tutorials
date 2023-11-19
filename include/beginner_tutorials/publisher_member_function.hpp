@@ -29,10 +29,13 @@ using namespace std::chrono_literals;
 
 class MinimalPublisher : public rclcpp::Node {
   public:
-    MinimalPublisher() : Node("minimal_publisher"), count_(0) {
+    MinimalPublisher(double freq) : Node("minimal_publisher"), count_(0) {
+      double pub_freq = this->declare_parameter("publisher_frequency", freq);
+      auto timer_interval = std::chrono::duration_cast<std::chrono::milliseconds>(
+          std::chrono::duration<double>(1.0 / pub_freq));
       publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
       timer_ = this->create_wall_timer(
-          500ms, std::bind(&MinimalPublisher::timer_callback, this));
+          timer_interval, std::bind(&MinimalPublisher::timer_callback, this));
       service_ = this->create_service<beginner_tutorials::srv::NewMsg>(
         "modify_string", [this](
             const std::shared_ptr<beginner_tutorials::srv::NewMsg::Request> request,
