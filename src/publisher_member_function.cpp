@@ -32,16 +32,16 @@ void MinimalPublisher::modify_string_service(
       const std::shared_ptr<beginner_tutorials::srv::NewMsg::Request> request,
       std::shared_ptr<beginner_tutorials::srv::NewMsg::Response> response) {
 
-    // RCLCPP_INFO_STREAM(rclcpp::get_logger("minimal_publisher"),
-    //                    "Modifying String - "<<request->new_msg);
-    // RCLCPP_DEBUG_STREAM(rclcpp::get_logger("minimal_publisher"),
-    //                    "Modifying String - "<<request->new_msg);                     
-    // RCLCPP_WARN_STREAM(rclcpp::get_logger("minimal_publisher"),
-    //                    "Modifying String - "<<request->new_msg);  
-    // RCLCPP_ERROR_STREAM(rclcpp::get_logger("minimal_publisher"),
-    //                    "Modifying String - "<<request->new_msg);                     
-    // RCLCPP_FATAL_STREAM(rclcpp::get_logger("minimal_publisher"),
-    //                    "Modifying String - "<<request->new_msg);                                    
+    RCLCPP_INFO_STREAM(rclcpp::get_logger("minimal_publisher"),
+                       "Modifying String - "<<request->new_msg);
+    RCLCPP_DEBUG_STREAM(rclcpp::get_logger("minimal_publisher"),
+                       "Modifying String - "<<request->new_msg);                     
+    RCLCPP_WARN_STREAM(rclcpp::get_logger("minimal_publisher"),
+                       "Modifying String - "<<request->new_msg);  
+    RCLCPP_ERROR_STREAM(rclcpp::get_logger("minimal_publisher"),
+                       "Modifying String - "<<request->new_msg);                     
+    RCLCPP_FATAL_STREAM(rclcpp::get_logger("minimal_publisher"),
+                       "Modifying String - "<<request->new_msg);                                    
     base_string_ = request->new_msg;
     response->set__response(true);
 }
