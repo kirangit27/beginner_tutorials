@@ -10,7 +10,8 @@ def generate_launch_description():
         executable='talker',
         name='minimal_publisher',
         output='screen',
-        parameters=[{'publisher_frequency': launch.substitutions.LaunchConfiguration('freq', default=2.0)}]
+        parameters=[{'publisher_frequency': launch.substitutions.LaunchConfiguration('freq', default=2.0)}],
+        arguments=['--ros-args', '--log-level', 'DEBUG']
     )
 
     # Define the listener node
