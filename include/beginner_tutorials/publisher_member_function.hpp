@@ -46,8 +46,20 @@
 
 using namespace std::chrono_literals;
 
+
+/**
+ * @brief A minimal ROS2 publisher node.
+ *
+ * This class demonstrates a simple ROS2 publisher node with a timer and a service.
+ */
 class MinimalPublisher : public rclcpp::Node {
+
   public:
+    /**
+     * @brief Constructor for the MinimalPublisher class.
+     *
+     * @param freq The desired frequency for the publisher.
+     */
     MinimalPublisher(double freq) : Node("minimal_publisher"), count_(0) {
       double pub_freq = this->declare_parameter("publisher_frequency", freq);
       auto timer_interval = std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -64,16 +76,33 @@ class MinimalPublisher : public rclcpp::Node {
     }
 
   private:
+
+    /**
+     * @brief Callback function for the timer.
+     */
     void timer_callback();
+
+    /**
+     * @brief Service callback for modifying the string.
+     *
+     * @param request The request containing the string to modify.
+     * @param response The response containing the modified string.
+     */
     void modify_string_service(
     const std::shared_ptr<beginner_tutorials::srv::NewMsg::Request> request,
     std::shared_ptr<beginner_tutorials::srv::NewMsg::Response> response);
-    std::string getData();
 
-    rclcpp::TimerBase::SharedPtr timer_;
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-    size_t count_;
-    std::string base_string_ = "ROS2 Programming Assignment 2";
-    rclcpp::Service<beginner_tutorials::srv::NewMsg>::SharedPtr service_;
+    /**
+     * @brief Get message to be published.
+     *
+     * @return The message to be published.
+     */
+    std::string getMsg();
+
+    rclcpp::TimerBase::SharedPtr timer_;    ///< Timer for publishing messages.
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;   ///< Publisher for string messages.
+    size_t count_;    ///< Count of published messages.
+    std::string base_string_ = "ROS2 Programming Assignment 2";   ///< Base string to be modified.
+    rclcpp::Service<beginner_tutorials::srv::NewMsg>::SharedPtr service_;   ///< Service for modifying strings.
 };
 

@@ -40,8 +40,16 @@
 
 using std::placeholders::_1;
 
+/**
+ * @brief A minimal ROS2 subscriber node.
+ *
+ * This class demonstrates a simple ROS2 subscriber node that listens to a string topic.
+ */
 class MinimalSubscriber : public rclcpp::Node {
   public:
+    /**
+     * @brief Constructor for the MinimalSubscriber class.
+     */
     MinimalSubscriber()
     : Node("minimal_subscriber") {
       subscription_ = this->create_subscription<std_msgs::msg::String>(
@@ -49,8 +57,13 @@ class MinimalSubscriber : public rclcpp::Node {
     }
 
   private:
+    /**
+     * @brief Callback function for the subscribed topic.
+     *
+     * @param msg The received string message.
+     */
     void topic_callback(const std_msgs::msg::String & msg) const;
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;   ///< Subscription to the string topic.
 };
 
 

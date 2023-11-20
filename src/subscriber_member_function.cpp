@@ -31,8 +31,12 @@
 #include "../include/beginner_tutorials/subscriber_member_function.hpp"
 
 /**
- * @brief Function Implementation for topic_callback
+ * @brief Callback function for the subscribed topic.
  *
+ * This function is called whenever a message is received on the subscribed topic.
+ * It logs the received string message to the console.
+ *
+ * @param msg The received string message.
  */
 void MinimalSubscriber::topic_callback(const std_msgs::msg::String & msg) const {
   RCLCPP_INFO(this->get_logger(), "I heard: '%s'", msg.data.c_str());
