@@ -36,8 +36,13 @@
 
    ```ros2 launch beginner_tutorials assignment2.launch.py freq:=1.0```
 
+ - to view logger levels on rqt_console.
+
+   ```ros2 run rqt_console rqt_console```
+
+   ![example output](./results/screenshot_rqt_console.png) 
+
 Note: 
  - It is assummed that all the dependencies are already present.
 dependencies - ROS2 Humble, ament_cmake, rclcpp, std_msgs, rosidl_default_generators.
 
- - 
