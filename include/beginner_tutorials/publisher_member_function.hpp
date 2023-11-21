@@ -44,6 +44,9 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/msg/transform_stamped.hpp>
+
 using namespace std::chrono_literals;
 
 
@@ -89,8 +92,8 @@ class MinimalPublisher : public rclcpp::Node {
      * @param response The response containing the modified string.
      */
     void modify_string_service(
-    const std::shared_ptr<beginner_tutorials::srv::NewMsg::Request> request,
-    std::shared_ptr<beginner_tutorials::srv::NewMsg::Response> response);
+      const std::shared_ptr<beginner_tutorials::srv::NewMsg::Request> request,
+      std::shared_ptr<beginner_tutorials::srv::NewMsg::Response> response);
 
     /**
      * @brief Get message to be published.
