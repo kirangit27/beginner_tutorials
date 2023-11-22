@@ -105,7 +105,7 @@ class MinimalPublisher : public rclcpp::Node {
     rclcpp::TimerBase::SharedPtr timer_;    ///< Timer for publishing messages.
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;   ///< Publisher for string messages.
     size_t count_;    ///< Count of published messages.
-    std::string base_string_ = "ROS2 Programming Assignment 2";   ///< Base string to be modified.
+    std::string base_string_ = "ROS2 Programming Assignment 3";   ///< Base string to be modified.
     rclcpp::Service<beginner_tutorials::srv::NewMsg>::SharedPtr service_;   ///< Service for modifying strings.
 };
 
