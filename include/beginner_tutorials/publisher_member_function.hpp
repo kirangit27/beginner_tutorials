@@ -44,6 +44,9 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
+#include <tf2_ros/transform_broadcaster.h>
+#include <geometry_msgs/msg/transform_stamped.hpp>
+
 using namespace std::chrono_literals;
 
 
@@ -89,8 +92,8 @@ class MinimalPublisher : public rclcpp::Node {
      * @param response The response containing the modified string.
      */
     void modify_string_service(
-    const std::shared_ptr<beginner_tutorials::srv::NewMsg::Request> request,
-    std::shared_ptr<beginner_tutorials::srv::NewMsg::Response> response);
+      const std::shared_ptr<beginner_tutorials::srv::NewMsg::Request> request,
+      std::shared_ptr<beginner_tutorials::srv::NewMsg::Response> response);
 
     /**
      * @brief Get message to be published.
@@ -102,7 +105,7 @@ class MinimalPublisher : public rclcpp::Node {
     rclcpp::TimerBase::SharedPtr timer_;    ///< Timer for publishing messages.
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;   ///< Publisher for string messages.
     size_t count_;    ///< Count of published messages.
-    std::string base_string_ = "ROS2 Programming Assignment 2";   ///< Base string to be modified.
+    std::string base_string_ = "ROS2 Programming Assignment 3";   ///< Base string to be modified.
     rclcpp::Service<beginner_tutorials::srv::NewMsg>::SharedPtr service_;   ///< Service for modifying strings.
 };
 

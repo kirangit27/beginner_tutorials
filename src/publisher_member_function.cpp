@@ -44,6 +44,26 @@ void MinimalPublisher::timer_callback() {
   RCLCPP_INFO_STREAM(rclcpp::get_logger("minimal_publisher"),
                        "Publishing: " << message.data.c_str());   ///< Log the message and publish it
   publisher_->publish(message);
+
+  // Broadcast tf transform
+  static tf2_ros::TransformBroadcaster tf_broadcaster(this);
+  geometry_msgs::msg::TransformStamped transform_stamped;
+
+  transform_stamped.header.stamp = this->now();
+  transform_stamped.header.frame_id = "world";  // Parent frame
+  transform_stamped.child_frame_id = "talk";    // Child frame
+
+  // Set non-zero translation and rotation
+  transform_stamped.transform.translation.x = 1.0;   
+  transform_stamped.transform.translation.y = 0.0;  
+  transform_stamped.transform.translation.z = 0.0;  
+  transform_stamped.transform.rotation.x = 0.0;      
+  transform_stamped.transform.rotation.y = 0.0;      
+  transform_stamped.transform.rotation.z = 0.0;      
+  transform_stamped.transform.rotation.w = 1.0;      
+
+  // Broadcast the transform
+  tf_broadcaster.sendTransform(transform_stamped);
 }
 
 /**
